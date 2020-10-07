@@ -17,15 +17,27 @@ namespace SingSingBot.Bots
         private readonly StateService _stateService;
         #endregion
 
-        protected override Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        public GreetingBot(StateService stateService)
         {
-            return base.OnMessageActivityAsync(turnContext, cancellationToken);
+            _stateService = stateService;
         }
 
 
-        protected override Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            return base.OnMembersAddedAsync(membersAdded, turnContext, cancellationToken);
+            await GetName(turnContext, cancellationToken);
+        }
+
+
+        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            foreach (var member in membersAdded)
+            {
+                if(member.Id != turnContext.Activity.Recipient.Id)
+                {
+                    await GetName(turnContext, cancellationToken);
+                }
+            }
         }
 
         private async  Task GetName(ITurnContext turnContext, CancellationToken cancellationToken)
@@ -54,8 +66,20 @@ namespace SingSingBot.Bots
                 }
                 else
                 {
+                    // Prompt the user for their name
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"What is your name?"), cancellationToken);
 
+                    // Set the flag to true, so we don't prompt in the next turn
+                    conversationData.PromptedUserForName = true;
                 }
+
+                // Save any state changes that might have occured during the turn
+                await _stateService.UserProfileAccessor.SetAsync(turnContext, userProfile);
+                await _stateService.ConversationDataAccessor.SetAsync(turnContext, conversationData);
+
+                await _stateService.UserState.SaveChangesAsync(turnContext);
+                await _stateService.ConversationState.SaveChangesAsync(turnContext);
+
             }
         }
 

@@ -7,6 +7,6 @@ namespace SingSingBot.Models
 {
     public class UserProfile
     {
-        public string Name { get; internal set; }
+        public string Name { get; set; }
     }
 }
