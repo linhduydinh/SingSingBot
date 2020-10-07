@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingSingBot", "SingSingBot.csproj", "{CB05CCE4-0826-4AF8-9885-5BA85BCE7836}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB05CCE4-0826-4AF8-9885-5BA85BCE7836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB05CCE4-0826-4AF8-9885-5BA85BCE7836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB05CCE4-0826-4AF8-9885-5BA85BCE7836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB05CCE4-0826-4AF8-9885-5BA85BCE7836}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16F46097-2637-4703-AB64-BABA1A6E556A}
+	EndGlobalSection
+EndGlobal
